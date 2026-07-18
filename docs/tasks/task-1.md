@@ -30,7 +30,7 @@ Static HTML/CSS/JS website that assesses allergic rhinitis risk from sudden weat
 - [x] No console errors (0 errors/warnings across all verification sessions)
 
 ## Commits
-<!-- Not a git repository — no commits. Suggest `git init` if version control is wanted. -->
+- 968fa4f — Initial release: Allergy Alert static web app (full app, docs, README; pushed to https://github.com/comdevx/allergy-alert)
 
 ## Completion Notes
 - Completed 2026-07-19. All acceptance criteria met. Remaining items: none.
