@@ -95,6 +95,21 @@ export default {
   adviceAir: 'PM2.5 elevado — use máscara N95 (PFF2) e evite exercícios ao ar livre',
   advicePollen: 'Pólen elevado — mantenha as janelas fechadas e tome banho ao chegar em casa',
 
+  // About / education
+  aboutHeading: 'O que é alergia ao clima?',
+  aboutIntro: 'A rinite alérgica é uma condição em que o revestimento do nariz (a mucosa nasal) reage de forma exagerada a elementos do ar — poeira, pólen ou até o próprio clima — causando espirros, coriza ou nariz entupido, e coceira e lacrimejamento nos olhos. A "alergia ao clima" também costuma incluir a rinite não alérgica (vasomotora), em que apenas mudanças de temperatura ou umidade — sem nenhum alérgeno — irritam os nervos e vasos sanguíneos hipersensíveis do nariz.',
+  aboutWhyHeading: 'Por que mudanças bruscas do tempo desencadeiam os sintomas?',
+  aboutWhyBody: 'O nariz funciona como o ar-condicionado do corpo: sua mucosa aquece e umidifica cada respiração antes de ela chegar aos pulmões. Quando as condições mudam rápido — uma manhã fresca que vira uma tarde quente, ou entrar e sair de ambientes com ar-condicionado — uma mucosa hipersensível reage em excesso: os vasos sanguíneos se dilatam, o tecido incha e produz muito muco. É por isso que surgem congestão, espirros e coriza.',
+  aboutTempTitle: 'Mudanças bruscas de temperatura',
+  aboutTempBody: 'Uma subida ou queda rápida da temperatura estimula diretamente os nervos da mucosa nasal. Os vasos sanguíneos se dilatam e a mucosa incha, então o nariz escorre ou entope — mesmo sem nenhum alérgeno envolvido.',
+  aboutHumidityTitle: 'Umidade',
+  aboutHumidityBody: 'O ar muito úmido favorece os ácaros e o mofo — que estão entre os alérgenos mais comuns. O ar muito seco resseca a mucosa nasal, deixando-a irritada e mais vulnerável aos gatilhos.',
+  aboutAirTitle: 'Partículas finas PM2.5',
+  aboutAirBody: 'Partículas tão pequenas passam pelos filtros do nariz e inflamam o revestimento das vias respiratórias. Um nariz inflamado fica ainda mais sensível; por isso, em dias de muita poeira, os sintomas de alergia pioram com mais facilidade e duram mais.',
+  aboutPollenTitle: 'Pólen',
+  aboutPollenBody: 'O pólen de gramíneas, ervas daninhas e árvores é um alérgeno comum. Em pessoas alérgicas, o sistema imunológico o confunde com uma ameaça e libera histamina — a substância por trás dos espirros, da coceira e da coriza.',
+  aboutOutro: 'Esses quatro gatilhos são exatamente os quatro fatores de risco que este app acompanha, para você ver o risco com antecedência e se preparar.',
+
   // Footer / status
   disclaimer: 'Esta é apenas uma avaliação preliminar, não um diagnóstico médico. Se os sintomas forem graves, procure um médico.',
   sourceCredit: 'Dados de clima e qualidade do ar de',

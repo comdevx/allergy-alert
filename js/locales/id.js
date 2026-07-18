@@ -95,6 +95,21 @@ export default {
   adviceAir: 'PM2.5 tinggi — pakai masker N95 dan hindari olahraga di luar ruangan',
   advicePollen: 'Serbuk sari tinggi — tutup jendela dan mandi setelah pulang ke rumah',
 
+  // About / education
+  aboutHeading: 'Apa itu alergi cuaca?',
+  aboutIntro: 'Rinitis alergi adalah kondisi ketika lapisan dalam hidung (mukosa hidung) bereaksi berlebihan terhadap hal-hal di udara — debu, serbuk sari, bahkan cuaca itu sendiri — sehingga menimbulkan bersin, pilek atau hidung tersumbat, serta mata gatal dan berair. "Alergi cuaca" yang biasa disebut orang juga mencakup rinitis non-alergi (vasomotor), yaitu ketika perubahan suhu atau kelembapan saja — tanpa alergen sama sekali — sudah cukup mengiritasi saraf dan pembuluh darah hidung yang terlalu sensitif.',
+  aboutWhyHeading: 'Mengapa perubahan cuaca mendadak memicunya?',
+  aboutWhyBody: 'Hidung bekerja seperti AC tubuh: lapisannya menghangatkan dan melembapkan setiap tarikan napas sebelum mencapai paru-paru. Saat kondisi berubah cepat — pagi yang sejuk berubah menjadi siang yang panas, atau sering keluar-masuk ruangan ber-AC — lapisan hidung yang terlalu sensitif bereaksi berlebihan: pembuluh darah melebar, jaringan membengkak, dan lendir keluar banyak. Itulah sebabnya hidung tersumbat, bersin, dan pilek.',
+  aboutTempTitle: 'Perubahan suhu mendadak',
+  aboutTempBody: 'Suhu yang naik atau turun dengan cepat langsung merangsang saraf di lapisan hidung. Pembuluh darah melebar dan lapisan membengkak, sehingga hidung meler atau tersumbat — bahkan tanpa alergen sama sekali.',
+  aboutHumidityTitle: 'Kelembapan',
+  aboutHumidityBody: 'Udara yang sangat lembap membuat tungau debu dan jamur tumbuh subur — keduanya termasuk alergen paling umum. Udara yang sangat kering membuat lapisan hidung mengering, teriritasi, dan lebih mudah diserang pemicu.',
+  aboutAirTitle: 'Debu halus PM2.5',
+  aboutAirBody: 'Partikel sekecil ini lolos dari saringan hidung dan membuat lapisan saluran napas meradang. Hidung yang meradang menjadi lebih sensitif, sehingga gejala alergi lebih mudah kambuh dan bertahan lebih lama pada hari-hari berdebu tinggi.',
+  aboutPollenTitle: 'Serbuk sari',
+  aboutPollenBody: 'Serbuk sari dari rumput, gulma, dan pohon adalah alergen yang umum. Pada orang yang alergi, sistem imun salah mengiranya sebagai ancaman dan melepaskan histamin — zat di balik bersin, gatal, dan pilek.',
+  aboutOutro: 'Empat pemicu ini persis empat faktor risiko yang dipantau aplikasi ini, agar Anda bisa melihat risiko lebih awal dan bersiap.',
+
   // Footer / status
   disclaimer: 'Ini hanya penilaian awal, bukan diagnosis medis. Jika gejala parah, segera periksakan ke dokter.',
   sourceCredit: 'Data cuaca dan kualitas udara dari',

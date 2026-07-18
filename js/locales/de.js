@@ -95,6 +95,21 @@ export default {
   adviceAir: 'Hohe PM2.5-Werte — tragen Sie eine N95-Maske (FFP2) und vermeiden Sie Sport im Freien',
   advicePollen: 'Starker Pollenflug — halten Sie die Fenster geschlossen und duschen Sie nach der Heimkehr',
 
+  // About / education
+  aboutHeading: 'Was ist eine Wetterallergie?',
+  aboutIntro: 'Allergische Rhinitis ist eine Erkrankung, bei der die Nasenschleimhaut überempfindlich auf Stoffe in der Luft reagiert — Staub, Pollen oder sogar das Wetter selbst — und Niesen, laufende oder verstopfte Nase sowie juckende, tränende Augen verursacht. Zur umgangssprachlichen „Wetterallergie“ zählt häufig auch die nicht-allergische (vasomotorische) Rhinitis, bei der allein Schwankungen von Temperatur oder Luftfeuchtigkeit — ganz ohne Allergen — die überempfindlichen Nerven und Blutgefäße der Nase reizen.',
+  aboutWhyHeading: 'Warum lösen plötzliche Wetterumschwünge Beschwerden aus?',
+  aboutWhyBody: 'Die Nase arbeitet wie die Klimaanlage des Körpers: Ihre Schleimhaut erwärmt und befeuchtet jeden Atemzug, bevor er die Lunge erreicht. Ändern sich die Bedingungen schnell — ein kühler Morgen wird zum heißen Nachmittag, oder man wechselt häufig zwischen klimatisierten Räumen und draußen — reagiert eine überempfindliche Schleimhaut übermäßig: Die Blutgefäße weiten sich, das Gewebe schwillt an und produziert viel Sekret. Daher kommen verstopfte Nase, Niesen und Naselaufen.',
+  aboutTempTitle: 'Plötzliche Temperaturschwankungen',
+  aboutTempBody: 'Ein schneller Temperaturanstieg oder -abfall reizt die Nerven der Nasenschleimhaut direkt. Die Blutgefäße weiten sich, die Schleimhaut schwillt an — die Nase läuft oder verstopft, selbst ganz ohne Allergen.',
+  aboutHumidityTitle: 'Luftfeuchtigkeit',
+  aboutHumidityBody: 'Sehr feuchte Luft begünstigt Hausstaubmilben und Schimmel — zwei der häufigsten Allergene. Sehr trockene Luft trocknet die Nasenschleimhaut aus; sie wird gereizt und anfälliger für Auslöser.',
+  aboutAirTitle: 'PM2.5-Feinstaub',
+  aboutAirBody: 'So kleine Partikel überwinden die Filter der Nase und entzünden die Schleimhaut der Atemwege. Eine entzündete Nase ist noch empfindlicher — an Tagen mit hoher Feinstaubbelastung flammen Allergiebeschwerden leichter auf und halten länger an.',
+  aboutPollenTitle: 'Pollen',
+  aboutPollenBody: 'Pollen von Gräsern, Kräutern und Bäumen sind häufige Allergene. Bei Allergikern hält das Immunsystem sie fälschlich für eine Bedrohung und schüttet Histamin aus — den Stoff hinter Niesen, Juckreiz und laufender Nase.',
+  aboutOutro: 'Diese vier Auslöser sind genau die vier Risikofaktoren, die diese App verfolgt — damit Sie Ihr Risiko im Voraus sehen und sich vorbereiten können.',
+
   // Footer / status
   disclaimer: 'Dies ist nur eine vorläufige Einschätzung und keine medizinische Diagnose. Bei starken Beschwerden suchen Sie bitte einen Arzt auf.',
   sourceCredit: 'Wetter- und Luftqualitätsdaten von',

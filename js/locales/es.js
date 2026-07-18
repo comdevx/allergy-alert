@@ -95,6 +95,21 @@ export default {
   adviceAir: 'PM2.5 elevado: usa mascarilla N95 y evita hacer ejercicio al aire libre',
   advicePollen: 'Polen elevado: mantén las ventanas cerradas y dúchate al llegar a casa',
 
+  // About / education
+  aboutHeading: '¿Qué es la alergia al clima?',
+  aboutIntro: 'La rinitis alérgica es una afección en la que el revestimiento de la nariz (la mucosa nasal) reacciona de forma exagerada a elementos del aire — polvo, polen o incluso el propio clima — y provoca estornudos, secreción o congestión nasal, y picor y lagrimeo en los ojos. La "alergia al clima" también suele incluir la rinitis no alérgica (vasomotora), en la que solo los cambios de temperatura o humedad — sin ningún alérgeno — irritan los nervios y vasos sanguíneos hipersensibles de la nariz.',
+  aboutWhyHeading: '¿Por qué los cambios bruscos del tiempo la desencadenan?',
+  aboutWhyBody: 'La nariz funciona como el aire acondicionado del cuerpo: su mucosa calienta y humidifica cada respiración antes de que llegue a los pulmones. Cuando las condiciones cambian rápido — una mañana fresca que se convierte en una tarde calurosa, o entrar y salir de espacios con aire acondicionado — una mucosa hipersensible reacciona en exceso: los vasos sanguíneos se dilatan, el tejido se inflama y produce mucha mucosidad. Por eso aparecen la congestión, los estornudos y la secreción nasal.',
+  aboutTempTitle: 'Cambios bruscos de temperatura',
+  aboutTempBody: 'Una subida o bajada rápida de la temperatura estimula directamente los nervios de la mucosa nasal. Los vasos sanguíneos se dilatan y la mucosa se inflama, así que la nariz gotea o se congestiona — incluso sin ningún alérgeno de por medio.',
+  aboutHumidityTitle: 'Humedad',
+  aboutHumidityBody: 'El aire muy húmedo favorece a los ácaros y al moho, que están entre los alérgenos más comunes. El aire muy seco reseca la mucosa nasal, dejándola irritada y más vulnerable a los desencadenantes.',
+  aboutAirTitle: 'Partículas finas PM2.5',
+  aboutAirBody: 'Partículas tan pequeñas atraviesan los filtros de la nariz e inflaman el revestimiento de las vías respiratorias. Una nariz inflamada es aún más sensible, por lo que en los días con mucho polvo los síntomas de alergia se agravan con más facilidad y duran más.',
+  aboutPollenTitle: 'Polen',
+  aboutPollenBody: 'El polen de gramíneas, malezas y árboles es un alérgeno común. En las personas alérgicas, el sistema inmunitario lo confunde con una amenaza y libera histamina — la sustancia responsable de los estornudos, el picor y la secreción nasal.',
+  aboutOutro: 'Estos cuatro desencadenantes son exactamente los cuatro factores de riesgo que esta app supervisa, para que veas tu riesgo con antelación y puedas prepararte.',
+
   // Footer / status
   disclaimer: 'Esta es solo una evaluación preliminar, no un diagnóstico médico. Si los síntomas son graves, consulta a un médico.',
   sourceCredit: 'Datos meteorológicos y de calidad del aire de',

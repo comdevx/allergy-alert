@@ -95,6 +95,21 @@ export default {
   adviceAir: 'Taux élevé de PM2.5 — portez un masque N95 et évitez le sport en extérieur',
   advicePollen: 'Pollen abondant — gardez les fenêtres fermées et douchez-vous en rentrant',
 
+  // About / education
+  aboutHeading: 'Qu’est-ce que l’allergie à la météo ?',
+  aboutIntro: 'La rhinite allergique est une affection dans laquelle la muqueuse du nez réagit de façon excessive à des éléments présents dans l’air — poussière, pollen, ou même la météo elle-même — provoquant éternuements, nez qui coule ou bouché, yeux qui piquent et larmoient. L’« allergie à la météo » englobe aussi couramment la rhinite non allergique (vasomotrice), où de simples variations de température ou d’humidité — sans aucun allergène — irritent les nerfs et les vaisseaux sanguins hypersensibles du nez.',
+  aboutWhyHeading: 'Pourquoi les changements brusques de météo la déclenchent-ils ?',
+  aboutWhyBody: 'Le nez fonctionne comme le climatiseur du corps : sa muqueuse réchauffe et humidifie chaque inspiration avant qu’elle n’atteigne les poumons. Quand les conditions changent vite — une matinée fraîche qui devient un après-midi chaud, ou des allers-retours dans des pièces climatisées — une muqueuse hypersensible réagit de manière excessive : les vaisseaux sanguins se dilatent, le tissu gonfle et sécrète beaucoup de mucus. D’où la congestion, les éternuements et le nez qui coule.',
+  aboutTempTitle: 'Variations brusques de température',
+  aboutTempBody: 'Une hausse ou une baisse rapide de la température stimule directement les nerfs de la muqueuse nasale. Les vaisseaux sanguins se dilatent, la muqueuse gonfle, et le nez coule ou se bouche — même sans aucun allergène.',
+  aboutHumidityTitle: 'Humidité',
+  aboutHumidityBody: 'Un air très humide favorise les acariens et les moisissures — parmi les allergènes les plus courants. Un air très sec assèche la muqueuse nasale, qui devient irritée et plus vulnérable aux déclencheurs.',
+  aboutAirTitle: 'Particules fines PM2.5',
+  aboutAirBody: 'Des particules aussi fines passent à travers les filtres du nez et enflamment la muqueuse des voies respiratoires. Un nez enflammé est encore plus sensible : les jours de forte pollution, les symptômes d’allergie s’aggravent plus facilement et durent plus longtemps.',
+  aboutPollenTitle: 'Pollen',
+  aboutPollenBody: 'Le pollen des graminées, des herbacées et des arbres est un allergène courant. Chez les personnes allergiques, le système immunitaire le prend pour une menace et libère de l’histamine — la substance à l’origine des éternuements, des démangeaisons et du nez qui coule.',
+  aboutOutro: 'Ces quatre déclencheurs sont exactement les quatre facteurs de risque que cette appli surveille, pour que vous puissiez anticiper votre risque et vous préparer.',
+
   // Footer / status
   disclaimer: 'Ceci n’est qu’une évaluation préliminaire, pas un diagnostic médical. En cas de symptômes sévères, consultez un médecin.',
   sourceCredit: 'Données météo et qualité de l’air fournies par',

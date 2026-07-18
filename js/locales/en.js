@@ -95,6 +95,21 @@ export default {
   adviceAir: 'High PM2.5 — wear an N95 mask and avoid outdoor exercise',
   advicePollen: 'High pollen — keep windows closed and shower after coming home',
 
+  // About / education
+  aboutHeading: 'What is weather allergy?',
+  aboutIntro: 'Allergic rhinitis is a condition where the lining of the nose (the nasal mucosa) overreacts to things in the air — dust, pollen, or even the weather itself — causing sneezing, a runny or blocked nose, and itchy, watery eyes. "Weather allergy" also commonly includes non-allergic (vasomotor) rhinitis, where shifts in temperature or humidity alone — with no allergen at all — irritate oversensitive nerves and blood vessels in the nose.',
+  aboutWhyHeading: 'Why do sudden weather changes trigger it?',
+  aboutWhyBody: 'Your nose works like the body’s air conditioner: its lining warms and humidifies every breath before it reaches the lungs. When conditions swing fast — a cool morning turning into a hot afternoon, or walking in and out of air-conditioned rooms — an oversensitive lining overreacts: blood vessels dilate, the tissue swells, and it pours out mucus. That is why you get congestion, sneezing, and a runny nose.',
+  aboutTempTitle: 'Sudden temperature swings',
+  aboutTempBody: 'A rapid rise or fall in temperature directly stimulates the nerves in the nasal lining. Blood vessels dilate and the lining swells, so the nose runs or blocks up — even with no allergen involved.',
+  aboutHumidityTitle: 'Humidity',
+  aboutHumidityBody: 'Very humid air helps dust mites and mold thrive — among the most common allergens. Very dry air dries out the nasal lining, leaving it irritated and easier for triggers to attack.',
+  aboutAirTitle: 'PM2.5 fine dust',
+  aboutAirBody: 'Particles this small slip past the nose’s filters and inflame the lining of the airways. An inflamed nose is even more sensitive, so allergy symptoms flare more easily and last longer on high-dust days.',
+  aboutPollenTitle: 'Pollen',
+  aboutPollenBody: 'Pollen from grasses, weeds, and trees is a common allergen. In allergic people the immune system mistakes it for a threat and releases histamine — the chemical behind sneezing, itching, and a runny nose.',
+  aboutOutro: 'These four triggers are exactly the four risk factors this app tracks, so you can see your risk ahead of time and prepare.',
+
   // Footer / status
   disclaimer: 'This is a preliminary assessment only, not a medical diagnosis. If symptoms are severe, please see a doctor.',
   sourceCredit: 'Weather and air quality data from',

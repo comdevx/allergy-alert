@@ -212,6 +212,20 @@ section h2 { font-size: 0.95rem; margin: 0 0 8px; }
 .advice ul { margin: 0; padding-inline-start: 1.3em; display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; }
 .disclaimer { font-size: 0.75rem; color: var(--ink-soft); margin: 10px 0 0; }
 
+/* ── About / education ── */
+.about {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow);
+  font-size: 0.9rem;
+}
+.about p { margin: 0; }
+.about h3 { font-size: 0.88rem; margin: 12px 0 4px; }
+.about-triggers { display: flex; flex-direction: column; gap: 10px; margin-block-start: 12px; }
+.about-trigger { border-inline-start: 3px solid var(--accent); padding-inline-start: 10px; }
+.about-trigger h4 { font-size: 0.85rem; margin: 0 0 2px; }
+.about-trigger p { font-size: 0.85rem; color: var(--ink-soft); }
+.about .about-outro { margin-block-start: 12px; color: var(--ink-soft); font-size: 0.85rem; }
+
 /* ── App states: loading / error / stale ── */
 .loading-state {
   text-align: center;
