@@ -1,0 +1,247 @@
+/* Allergy Alert — app stylesheet (adopted from docs/mockups/index.html)
+   Physical properties converted to logical ones for RTL support. */
+
+/* ── Design tokens ── */
+:root {
+  --bg: #eef3f6;
+  --surface: #ffffff;
+  --ink: #1c2b36;
+  --ink-soft: #5a707e;
+  --line: #d8e2e8;
+  --accent: #1f7a8c;
+  --accent-ink: #ffffff;
+  /* semantic risk colors (separate from accent) */
+  --risk-low: #2f8f5b;
+  --risk-med: #d9a50f;
+  --risk-high: #e07b12;
+  --risk-vhigh: #cf3b2e;
+  --risk-ink: #241300;      /* dark text on med/high banners */
+  --bar: #9fc3d0;
+  --bar-hot: #e07b12;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(28, 43, 54, 0.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101a21;
+    --surface: #18242d;
+    --ink: #e4edf2;
+    --ink-soft: #93a7b3;
+    --line: #26343f;
+    --accent: #4fa9bc;
+    --accent-ink: #08171c;
+    --risk-low: #3aa96e;
+    --risk-med: #e0b02a;
+    --risk-high: #ea8c2a;
+    --risk-vhigh: #e05648;
+    --bar: #3c5866;
+    --bar-hot: #ea8c2a;
+    --shadow: none;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #eef3f6; --surface: #ffffff; --ink: #1c2b36; --ink-soft: #5a707e;
+  --line: #d8e2e8; --accent: #1f7a8c; --accent-ink: #ffffff;
+  --risk-low: #2f8f5b; --risk-med: #d9a50f; --risk-high: #e07b12; --risk-vhigh: #cf3b2e;
+  --bar: #9fc3d0; --bar-hot: #e07b12; --shadow: 0 1px 3px rgba(28,43,54,0.08);
+}
+:root[data-theme="dark"] {
+  --bg: #101a21; --surface: #18242d; --ink: #e4edf2; --ink-soft: #93a7b3;
+  --line: #26343f; --accent: #4fa9bc; --accent-ink: #08171c;
+  --risk-low: #3aa96e; --risk-med: #e0b02a; --risk-high: #ea8c2a; --risk-vhigh: #e05648;
+  --bar: #3c5866; --bar-hot: #ea8c2a; --shadow: none;
+}
+
+/* ── Base ── */
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans Thai", "Sukhumvit Set", "Thonburi", system-ui, sans-serif;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 640px;
+  margin-inline: auto;
+  padding-block: 16px 32px;
+  padding-inline: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Header ── */
+header { display: flex; flex-direction: column; gap: 8px; }
+.brand-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+h1 { font-size: 1.15rem; margin: 0; font-weight: 700; }
+h1 small { display: block; font-size: 0.75rem; font-weight: 400; color: var(--ink-soft); }
+.loc-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--ink-soft); flex-wrap: wrap; }
+.loc-name { color: var(--ink); font-weight: 600; }
+.btn {
+  font: inherit; font-size: 0.8rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--accent);
+  padding-block: 4px; padding-inline: 12px; cursor: pointer;
+}
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn--primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.brand-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.lang-wrap { display: inline-flex; align-items: center; gap: 4px; font-size: 0.85rem; }
+.lang {
+  font: inherit; font-size: 0.8rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink);
+  padding-block: 4px; padding-inline: 8px; max-width: 110px;
+}
+.lang:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.updated { margin-inline-start: auto; font-size: 0.75rem; }
+
+/* ── Location chips (multi-area) ── */
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-block-end: 2px; }
+.chip {
+  font: inherit; font-size: 0.8rem; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink);
+  padding-block: 5px; padding-inline: 12px; cursor: pointer;
+}
+.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chip--active { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.chip--add { color: var(--accent); border-style: dashed; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.dot--low { background: var(--risk-low); }
+.dot--med { background: var(--risk-med); }
+.dot--high { background: var(--risk-high); }
+.dot--vhigh { background: var(--risk-vhigh); }
+.chip--active .dot--high { box-shadow: 0 0 0 2px var(--accent-ink) inset; }
+
+/* ── Province picker panel ── */
+.picker {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.picker p { margin: 0; font-size: 0.9rem; }
+.picker-select {
+  font: inherit; font-size: 0.9rem;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink);
+  padding-block: 6px; padding-inline: 10px;
+}
+.picker-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.picker-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+/* ── Risk banner ── */
+.banner {
+  border-radius: var(--radius);
+  padding: 20px;
+  color: var(--risk-ink);
+  box-shadow: var(--shadow);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.banner--low   { background: var(--risk-low);   color: #fff; }
+.banner--med   { background: var(--risk-med); }
+.banner--high  { background: var(--risk-high); }
+.banner--vhigh { background: var(--risk-vhigh); color: #fff; }
+.banner .label { font-size: 0.85rem; opacity: 0.85; letter-spacing: 0.02em; }
+.banner .level { font-size: 2rem; font-weight: 800; line-height: 1.2; }
+.banner .reason { font-size: 0.9rem; }
+
+/* ── Factor cards ── */
+.factors { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding-block: 12px; padding-inline: 14px;
+  box-shadow: var(--shadow);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.card .name { font-size: 0.78rem; color: var(--ink-soft); }
+.card .value { font-size: 1.35rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.card .value small { font-size: 0.75rem; font-weight: 400; color: var(--ink-soft); }
+.card .grade { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; margin-block-start: 4px; }
+.dots { display: inline-flex; gap: 3px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.dots i.on-1 { background: var(--risk-med); }
+.dots i.on-2 { background: var(--risk-high); }
+.dots i.on-3 { background: var(--risk-vhigh); }
+.card--muted { opacity: 0.65; }
+.card--muted .value { font-size: 0.9rem; font-weight: 500; color: var(--ink-soft); }
+
+/* ── 7-day forecast ── */
+.days { display: grid; grid-template-columns: repeat(7, minmax(72px, 1fr)); gap: 8px; overflow-x: auto; padding-block-end: 4px; }
+.day {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding-block: 10px; padding-inline: 6px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  text-align: center; border-block-start: 4px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.day--low   { border-block-start-color: var(--risk-low); }
+.day--med   { border-block-start-color: var(--risk-med); }
+.day--high  { border-block-start-color: var(--risk-high); }
+.day--vhigh { border-block-start-color: var(--risk-vhigh); }
+.day .d-name { font-size: 0.78rem; font-weight: 700; }
+.day .d-date { font-size: 0.68rem; color: var(--ink-soft); }
+.day .d-temp { font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+.day .d-level { font-size: 0.72rem; font-weight: 600; border-radius: 999px; padding-block: 1px; padding-inline: 8px; }
+.day--low .d-level   { background: var(--risk-low); color: #fff; }
+.day--med .d-level   { background: var(--risk-med); color: var(--risk-ink); }
+.day--high .d-level  { background: var(--risk-high); color: var(--risk-ink); }
+.day--vhigh .d-level { background: var(--risk-vhigh); color: #fff; }
+
+/* ── Outlook strip ── */
+section h2 { font-size: 0.95rem; margin: 0 0 8px; }
+.outlook {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow);
+}
+.strip { display: flex; gap: 3px; align-items: flex-end; height: 72px; overflow-x: auto; padding-block-end: 4px; }
+.strip .h { flex: 1 0 14px; background: var(--bar); border-start-start-radius: 3px; border-start-end-radius: 3px; }
+.strip .h.hot { background: var(--bar-hot); }
+.strip-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--ink-soft); margin-block-start: 6px; }
+.outlook .note { font-size: 0.8rem; color: var(--ink-soft); margin-block-start: 8px; }
+.outlook .note b { color: var(--risk-high); }
+
+/* ── Advice ── */
+.advice { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
+.advice ul { margin: 0; padding-inline-start: 1.3em; display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; }
+.disclaimer { font-size: 0.75rem; color: var(--ink-soft); margin: 10px 0 0; }
+
+/* ── App states: loading / error / stale ── */
+.loading-state {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  padding-block: 24px;
+}
+.error-state {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.error-state p { margin: 0; font-size: 0.9rem; }
+.stale-notice {
+  background: var(--surface);
+  border: 1px solid var(--risk-med);
+  border-inline-start: 4px solid var(--risk-med);
+  border-radius: var(--radius);
+  padding-block: 10px; padding-inline: 14px;
+  font-size: 0.8rem; color: var(--ink-soft);
+  box-shadow: var(--shadow);
+}
+
+/* ── Footer ── */
+footer { font-size: 0.75rem; color: var(--ink-soft); text-align: center; }
+footer a { color: var(--accent); }
+
+/* ── Responsive / motion ── */
+@media (max-width: 420px) { .factors { grid-template-columns: 1fr 1fr; } }
+@media (prefers-reduced-motion: no-preference) {
+  .banner { transition: background 0.3s ease; }
+}

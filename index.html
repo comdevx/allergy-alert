@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="appTitle">เตือนภูมิแพ้อากาศ</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="brand-row">
+        <h1><span data-i18n="appTitle">เตือนภูมิแพ้อากาศ</span> <small data-i18n="appSubtitle">ประเมินความเสี่ยงจากสภาพอากาศเปลี่ยนกระทันหัน</small></h1>
+        <div class="brand-actions">
+          <label class="lang-wrap">🌐<select id="langSelect" class="lang" aria-label="ภาษา / Language" data-i18n-aria="langLabel"></select></label>
+          <button id="refreshBtn" class="btn" type="button" data-i18n="refresh">รีเฟรช</button>
+        </div>
+      </div>
+      <div id="areaChips" class="chips" role="tablist" aria-label="พื้นที่ของฉัน" data-i18n-aria="myAreas"></div>
+      <div class="loc-row">
+        <span id="updatedAt" class="updated"></span>
+      </div>
+    </header>
+
+    <div id="provincePicker" class="picker" hidden>
+      <p id="pickerMsg" data-i18n="pickerMsg">เลือกจังหวัดที่ต้องการติดตาม</p>
+      <select id="provinceSelect" class="picker-select"></select>
+      <div class="picker-actions">
+        <button id="pickerConfirm" class="btn btn--primary" type="button" data-i18n="confirm">ตกลง</button>
+        <button id="pickerCancel" class="btn" type="button" data-i18n="cancel">ยกเลิก</button>
+      </div>
+    </div>
+
+    <div id="riskBanner" class="banner" aria-live="polite">
+      <span id="bannerLabel" class="label" data-i18n="riskBannerLabel">ความเสี่ยงภูมิแพ้อากาศวันนี้</span>
+      <span id="bannerLevel" class="level"></span>
+      <span id="bannerReason" class="reason"></span>
+    </div>
+
+    <section>
+      <h2 data-i18n="factorsHeading">ปัจจัยเสี่ยง</h2>
+      <div id="factorCards" class="factors"></div>
+    </section>
+
+    <section>
+      <h2 data-i18n="daysHeading">คาดการณ์ความเสี่ยง 7 วันข้างหน้า</h2>
+      <div id="daysForecast" class="days"></div>
+    </section>
+
+    <section>
+      <h2 data-i18n="outlookHeading">แนวโน้มอุณหภูมิ 24 ชม. ข้างหน้า</h2>
+      <div class="outlook">
+        <div id="outlookStrip" class="strip" aria-hidden="true"></div>
+        <div id="outlookLabels" class="strip-labels"></div>
+        <p id="outlookNote" class="note"></p>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-i18n="adviceHeading">คำแนะนำ</h2>
+      <div class="advice">
+        <ul id="adviceList"></ul>
+        <p class="disclaimer" data-i18n="disclaimer">ข้อมูลนี้เป็นเพียงการประเมินเบื้องต้น ไม่ใช่คำวินิจฉัยทางการแพทย์ หากอาการรุนแรงควรพบแพทย์</p>
+      </div>
+    </section>
+
+    <div id="loadingState" class="loading-state" data-i18n="loading">กำลังโหลดข้อมูล…</div>
+
+    <section id="errorState" class="error-state" hidden>
+      <p id="errorMsg" data-i18n="errorMsg">โหลดข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง</p>
+      <button id="retryBtn" class="btn btn--primary" type="button" data-i18n="retry">ลองใหม่</button>
+    </section>
+
+    <div id="staleNotice" class="stale-notice" data-i18n="staleNotice" hidden>กำลังแสดงข้อมูลที่บันทึกไว้ล่าสุด — ยังเชื่อมต่อไม่สำเร็จ</div>
+
+    <footer>
+      <span data-i18n="sourceCredit">ข้อมูลสภาพอากาศและคุณภาพอากาศจาก</span> <a href="https://open-meteo.com">Open-Meteo.com</a>
+    </footer>
+
+  </div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

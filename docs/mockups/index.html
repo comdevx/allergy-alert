@@ -1,0 +1,352 @@
+<!--
+  Mockup: Allergy Alert — allergic rhinitis weather-warning page (Thai UI)
+  Greenfield project — no existing design system. This mockup IS the intended
+  implementation: after approval, split <style> into css/style.css and the
+  markup becomes index.html (dynamic values rendered by js/ui.js).
+  Example state shown: overall risk "สูง" (orange), pollen unavailable.
+-->
+<title>เตือนภูมิแพ้อากาศ</title>
+<style>
+  :root {
+    --bg: #eef3f6;
+    --surface: #ffffff;
+    --ink: #1c2b36;
+    --ink-soft: #5a707e;
+    --line: #d8e2e8;
+    --accent: #1f7a8c;
+    --accent-ink: #ffffff;
+    /* semantic risk colors (separate from accent) */
+    --risk-low: #2f8f5b;
+    --risk-med: #d9a50f;
+    --risk-high: #e07b12;
+    --risk-vhigh: #cf3b2e;
+    --risk-ink: #241300;      /* dark text on med/high banners */
+    --bar: #9fc3d0;
+    --bar-hot: #e07b12;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(28, 43, 54, 0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101a21;
+      --surface: #18242d;
+      --ink: #e4edf2;
+      --ink-soft: #93a7b3;
+      --line: #26343f;
+      --accent: #4fa9bc;
+      --accent-ink: #08171c;
+      --risk-low: #3aa96e;
+      --risk-med: #e0b02a;
+      --risk-high: #ea8c2a;
+      --risk-vhigh: #e05648;
+      --bar: #3c5866;
+      --bar-hot: #ea8c2a;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #eef3f6; --surface: #ffffff; --ink: #1c2b36; --ink-soft: #5a707e;
+    --line: #d8e2e8; --accent: #1f7a8c; --accent-ink: #ffffff;
+    --risk-low: #2f8f5b; --risk-med: #d9a50f; --risk-high: #e07b12; --risk-vhigh: #cf3b2e;
+    --bar: #9fc3d0; --bar-hot: #e07b12; --shadow: 0 1px 3px rgba(28,43,54,0.08);
+  }
+  :root[data-theme="dark"] {
+    --bg: #101a21; --surface: #18242d; --ink: #e4edf2; --ink-soft: #93a7b3;
+    --line: #26343f; --accent: #4fa9bc; --accent-ink: #08171c;
+    --risk-low: #3aa96e; --risk-med: #e0b02a; --risk-high: #ea8c2a; --risk-vhigh: #e05648;
+    --bar: #3c5866; --bar-hot: #ea8c2a; --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans Thai", "Sukhumvit Set", "Thonburi", system-ui, sans-serif;
+    line-height: 1.55;
+  }
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 16px 16px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ── Header ── */
+  header { display: flex; flex-direction: column; gap: 8px; }
+  .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  h1 { font-size: 1.15rem; margin: 0; font-weight: 700; }
+  h1 small { display: block; font-size: 0.75rem; font-weight: 400; color: var(--ink-soft); }
+  .loc-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--ink-soft); flex-wrap: wrap; }
+  .loc-name { color: var(--ink); font-weight: 600; }
+  .btn {
+    font: inherit; font-size: 0.8rem;
+    border: 1px solid var(--line); border-radius: 999px;
+    background: var(--surface); color: var(--accent);
+    padding: 4px 12px; cursor: pointer;
+  }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn--primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .brand-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .lang-wrap { display: inline-flex; align-items: center; gap: 4px; font-size: 0.85rem; }
+  .lang {
+    font: inherit; font-size: 0.8rem;
+    border: 1px solid var(--line); border-radius: 999px;
+    background: var(--surface); color: var(--ink);
+    padding: 4px 8px; max-width: 110px;
+  }
+  .lang:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .updated { margin-left: auto; font-size: 0.75rem; }
+
+  /* ── Location chips (multi-area) ── */
+  .chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
+  .chip {
+    font: inherit; font-size: 0.8rem; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--line); border-radius: 999px;
+    background: var(--surface); color: var(--ink);
+    padding: 5px 12px; cursor: pointer;
+  }
+  .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .chip--active { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .chip--add { color: var(--accent); border-style: dashed; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .dot--low { background: var(--risk-low); }
+  .dot--med { background: var(--risk-med); }
+  .dot--high { background: var(--risk-high); }
+  .dot--vhigh { background: var(--risk-vhigh); }
+  .chip--active .dot--high { box-shadow: 0 0 0 2px var(--accent-ink) inset; }
+
+  /* ── 7-day forecast ── */
+  .days { display: grid; grid-template-columns: repeat(7, minmax(72px, 1fr)); gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+  .day {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 10px 6px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    text-align: center; border-top: 4px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+  .day--low   { border-top-color: var(--risk-low); }
+  .day--med   { border-top-color: var(--risk-med); }
+  .day--high  { border-top-color: var(--risk-high); }
+  .day--vhigh { border-top-color: var(--risk-vhigh); }
+  .day .d-name { font-size: 0.78rem; font-weight: 700; }
+  .day .d-date { font-size: 0.68rem; color: var(--ink-soft); }
+  .day .d-temp { font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+  .day .d-level { font-size: 0.72rem; font-weight: 600; border-radius: 999px; padding: 1px 8px; }
+  .day--low .d-level   { background: var(--risk-low); color: #fff; }
+  .day--med .d-level   { background: var(--risk-med); color: var(--risk-ink); }
+  .day--high .d-level  { background: var(--risk-high); color: var(--risk-ink); }
+  .day--vhigh .d-level { background: var(--risk-vhigh); color: #fff; }
+
+  /* ── Risk banner ── */
+  .banner {
+    border-radius: var(--radius);
+    padding: 20px;
+    color: var(--risk-ink);
+    box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .banner--low   { background: var(--risk-low);   color: #fff; }
+  .banner--med   { background: var(--risk-med); }
+  .banner--high  { background: var(--risk-high); }
+  .banner--vhigh { background: var(--risk-vhigh); color: #fff; }
+  .banner .label { font-size: 0.85rem; opacity: 0.85; letter-spacing: 0.02em; }
+  .banner .level { font-size: 2rem; font-weight: 800; line-height: 1.2; }
+  .banner .reason { font-size: 0.9rem; }
+
+  /* ── Factor cards ── */
+  .factors { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .card .name { font-size: 0.78rem; color: var(--ink-soft); }
+  .card .value { font-size: 1.35rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .card .value small { font-size: 0.75rem; font-weight: 400; color: var(--ink-soft); }
+  .card .grade { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; margin-top: 4px; }
+  .dots { display: inline-flex; gap: 3px; }
+  .dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+  .dots i.on-1 { background: var(--risk-med); }
+  .dots i.on-2 { background: var(--risk-high); }
+  .dots i.on-3 { background: var(--risk-vhigh); }
+  .card--muted { opacity: 0.65; }
+  .card--muted .value { font-size: 0.9rem; font-weight: 500; color: var(--ink-soft); }
+
+  /* ── Outlook strip ── */
+  section h2 { font-size: 0.95rem; margin: 0 0 8px; }
+  .outlook {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow);
+  }
+  .strip { display: flex; gap: 3px; align-items: flex-end; height: 72px; overflow-x: auto; padding-bottom: 4px; }
+  .strip .h { flex: 1 0 14px; background: var(--bar); border-radius: 3px 3px 0 0; }
+  .strip .h.hot { background: var(--bar-hot); }
+  .strip-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--ink-soft); margin-top: 6px; }
+  .outlook .note { font-size: 0.8rem; color: var(--ink-soft); margin-top: 8px; }
+  .outlook .note b { color: var(--risk-high); }
+
+  /* ── Advice ── */
+  .advice { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
+  .advice ul { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; }
+  .disclaimer { font-size: 0.75rem; color: var(--ink-soft); margin: 10px 0 0; }
+
+  footer { font-size: 0.75rem; color: var(--ink-soft); text-align: center; }
+  footer a { color: var(--accent); }
+
+  @media (max-width: 420px) { .factors { grid-template-columns: 1fr 1fr; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .banner { transition: background 0.3s ease; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="brand-row">
+      <h1>เตือนภูมิแพ้อากาศ <small>ประเมินความเสี่ยงจากสภาพอากาศเปลี่ยนกระทันหัน</small></h1>
+      <div class="brand-actions">
+        <label class="lang-wrap">🌐<select class="lang" aria-label="ภาษา / Language">
+          <option selected>ไทย</option>
+          <option>English</option>
+          <option>中文</option>
+          <option>日本語</option>
+          <option>한국어</option>
+          <option>Español</option>
+          <option>Français</option>
+          <option>Deutsch</option>
+          <option>Português</option>
+          <option>Русский</option>
+          <option>العربية</option>
+          <option>हिन्दी</option>
+          <option>Bahasa Indonesia</option>
+          <option>Tiếng Việt</option>
+        </select></label>
+        <button class="btn" type="button">รีเฟรช</button>
+      </div>
+    </div>
+    <div class="chips" role="tablist" aria-label="พื้นที่ของฉัน">
+      <button class="chip chip--active" type="button" role="tab" aria-selected="true">📍 กรุงเทพฯ (ปัจจุบัน) <i class="dot dot--high" aria-hidden="true"></i> สูง</button>
+      <button class="chip" type="button" role="tab" aria-selected="false">เชียงใหม่ <i class="dot dot--med" aria-hidden="true"></i> ปานกลาง</button>
+      <button class="chip" type="button" role="tab" aria-selected="false">ขอนแก่น <i class="dot dot--low" aria-hidden="true"></i> ต่ำ</button>
+      <button class="chip chip--add" type="button">+ เพิ่มพื้นที่</button>
+    </div>
+    <div class="loc-row">
+      <span class="updated">อัปเดตล่าสุด 19 ก.ค. 14:00 น.</span>
+    </div>
+  </header>
+
+  <div class="banner banner--high" aria-live="polite">
+    <span class="label">ความเสี่ยงภูมิแพ้อากาศวันนี้</span>
+    <span class="level">⚠️ สูง</span>
+    <span class="reason">อุณหภูมิเปลี่ยน 8.2°C ใน 24 ชม. และฝุ่น PM2.5 เกินมาตรฐาน</span>
+  </div>
+
+  <section>
+    <h2>ปัจจัยเสี่ยง</h2>
+    <div class="factors">
+      <div class="card">
+        <span class="name">อุณหภูมิเปลี่ยนแปลง (24 ชม.)</span>
+        <span class="value">8.2 <small>°C</small></span>
+        <span class="grade"><span class="dots"><i class="on-2"></i><i class="on-2"></i><i></i></span> สูง</span>
+      </div>
+      <div class="card">
+        <span class="name">ฝุ่น PM2.5</span>
+        <span class="value">42 <small>µg/m³</small></span>
+        <span class="grade"><span class="dots"><i class="on-2"></i><i class="on-2"></i><i></i></span> เริ่มมีผลต่อสุขภาพ</span>
+      </div>
+      <div class="card">
+        <span class="name">ความชื้นสัมพัทธ์</span>
+        <span class="value">78 <small>%</small></span>
+        <span class="grade"><span class="dots"><i class="on-1"></i><i></i><i></i></span> เฝ้าระวัง</span>
+      </div>
+      <div class="card card--muted">
+        <span class="name">ละอองเกสร</span>
+        <span class="value">ไม่มีข้อมูลในพื้นที่นี้</span>
+        <span class="grade"><span class="dots"><i></i><i></i><i></i></span> ไม่นำมาคำนวณ</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>คาดการณ์ความเสี่ยง 7 วันข้างหน้า</h2>
+    <div class="days">
+      <div class="day day--high">
+        <span class="d-name">วันนี้</span><span class="d-date">19 ก.ค.</span>
+        <span class="d-temp">26–34°</span><span class="d-level">สูง</span>
+      </div>
+      <div class="day day--high">
+        <span class="d-name">พรุ่งนี้</span><span class="d-date">20 ก.ค.</span>
+        <span class="d-temp">25–33°</span><span class="d-level">สูง</span>
+      </div>
+      <div class="day day--med">
+        <span class="d-name">จ.</span><span class="d-date">21 ก.ค.</span>
+        <span class="d-temp">26–32°</span><span class="d-level">ปานกลาง</span>
+      </div>
+      <div class="day day--med">
+        <span class="d-name">อ.</span><span class="d-date">22 ก.ค.</span>
+        <span class="d-temp">26–31°</span><span class="d-level">ปานกลาง</span>
+      </div>
+      <div class="day day--low">
+        <span class="d-name">พ.</span><span class="d-date">23 ก.ค.</span>
+        <span class="d-temp">27–31°</span><span class="d-level">ต่ำ</span>
+      </div>
+      <div class="day day--low">
+        <span class="d-name">พฤ.</span><span class="d-date">24 ก.ค.</span>
+        <span class="d-temp">27–32°</span><span class="d-level">ต่ำ</span>
+      </div>
+      <div class="day day--med">
+        <span class="d-name">ศ.</span><span class="d-date">25 ก.ค.</span>
+        <span class="d-temp">26–33°</span><span class="d-level">ปานกลาง</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>แนวโน้มอุณหภูมิ 24 ชม. ข้างหน้า</h2>
+    <div class="outlook">
+      <div class="strip" aria-hidden="true">
+        <div class="h" style="height:62%"></div><div class="h" style="height:58%"></div>
+        <div class="h" style="height:54%"></div><div class="h" style="height:50%"></div>
+        <div class="h" style="height:46%"></div><div class="h" style="height:44%"></div>
+        <div class="h" style="height:42%"></div><div class="h" style="height:45%"></div>
+        <div class="h" style="height:52%"></div><div class="h" style="height:60%"></div>
+        <div class="h hot" style="height:72%"></div><div class="h hot" style="height:84%"></div>
+        <div class="h hot" style="height:92%"></div><div class="h hot" style="height:96%"></div>
+        <div class="h hot" style="height:100%"></div><div class="h hot" style="height:94%"></div>
+        <div class="h" style="height:84%"></div><div class="h" style="height:74%"></div>
+        <div class="h" style="height:66%"></div><div class="h" style="height:60%"></div>
+        <div class="h" style="height:56%"></div><div class="h" style="height:52%"></div>
+        <div class="h" style="height:50%"></div><div class="h" style="height:48%"></div>
+      </div>
+      <div class="strip-labels"><span>15:00</span><span>21:00</span><span>03:00</span><span>09:00</span><span>14:00</span></div>
+      <p class="note">ช่วง 01:00–06:00 อุณหภูมิลดลงเร็ว <b>คาดว่าแกว่งสูงสุด 8.2°C</b> — ระวังอาการช่วงเช้ามืด</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>คำแนะนำ</h2>
+    <div class="advice">
+      <ul>
+        <li>สวมหน้ากาก N95 เมื่ออยู่กลางแจ้ง</li>
+        <li>ปิดหน้าต่างและใช้เครื่องฟอกอากาศถ้ามี</li>
+        <li>พกยาแก้แพ้ (antihistamine) ติดตัว</li>
+        <li>ล้างจมูกด้วยน้ำเกลือหลังกลับถึงบ้าน</li>
+        <li>อุณหภูมิเปลี่ยนแปลงมาก — สวมเสื้อผ้าให้เหมาะสม หลีกเลี่ยงการเข้า-ออกห้องแอร์บ่อย ๆ</li>
+        <li>ความชื้นสูง — ระวังเชื้อราและไรฝุ่นในบ้าน</li>
+      </ul>
+      <p class="disclaimer">ข้อมูลนี้เป็นเพียงการประเมินเบื้องต้น ไม่ใช่คำวินิจฉัยทางการแพทย์ หากอาการรุนแรงควรพบแพทย์</p>
+    </div>
+  </section>
+
+  <footer>
+    ข้อมูลสภาพอากาศและคุณภาพอากาศจาก <a href="https://open-meteo.com">Open-Meteo.com</a>
+  </footer>
+
+</div>
