@@ -117,5 +117,11 @@ export default {
   errorTitle: 'Đã xảy ra lỗi',
   errorMsg: 'Không tải được dữ liệu. Vui lòng kiểm tra kết nối.',
   retry: 'Thử lại',
-  langLabel: 'Ngôn ngữ'
+  langLabel: 'Ngôn ngữ',
+
+  // Share
+  shareResult: 'Chia sẻ kết quả',
+  copyLink: 'Sao chép liên kết',
+  linkCopied: 'Đã sao chép liên kết',
+  copyFailed: 'Không thể sao chép'
 };

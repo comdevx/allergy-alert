@@ -117,5 +117,11 @@ export default {
   errorTitle: 'कुछ गड़बड़ हो गई',
   errorMsg: 'डेटा लोड नहीं हो सका। अपना कनेक्शन जाँचें।',
   retry: 'फिर कोशिश करें',
-  langLabel: 'भाषा'
+  langLabel: 'भाषा',
+
+  // Share
+  shareResult: 'परिणाम साझा करें',
+  copyLink: 'लिंक कॉपी करें',
+  linkCopied: 'लिंक कॉपी हो गया',
+  copyFailed: 'कॉपी नहीं हो सका'
 };

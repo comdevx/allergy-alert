@@ -117,5 +117,11 @@ export default {
   errorTitle: 'Algo deu errado',
   errorMsg: 'Não foi possível carregar os dados. Verifique sua conexão.',
   retry: 'Tentar novamente',
-  langLabel: 'Idioma'
+  langLabel: 'Idioma',
+
+  // Share
+  shareResult: 'Compartilhar resultado',
+  copyLink: 'Copiar link',
+  linkCopied: 'Link copiado',
+  copyFailed: 'Não foi possível copiar'
 };

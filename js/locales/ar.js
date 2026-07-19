@@ -118,5 +118,11 @@ export default {
   errorTitle: 'حدث خطأ ما',
   errorMsg: 'تعذّر تحميل البيانات. تحقق من اتصالك.',
   retry: 'إعادة المحاولة',
-  langLabel: 'اللغة'
+  langLabel: 'اللغة',
+
+  // Share
+  shareResult: 'مشاركة النتيجة',
+  copyLink: 'نسخ الرابط',
+  linkCopied: 'تم نسخ الرابط',
+  copyFailed: 'تعذر النسخ'
 };

@@ -118,5 +118,11 @@ export default {
   errorTitle: 'เกิดข้อผิดพลาด',
   errorMsg: 'โหลดข้อมูลไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่อ',
   retry: 'ลองใหม่',
-  langLabel: 'ภาษา'
+  langLabel: 'ภาษา',
+
+  // Share
+  shareResult: 'แชร์ผลประเมิน',
+  copyLink: 'คัดลอกลิงก์',
+  linkCopied: 'คัดลอกลิงก์แล้ว',
+  copyFailed: 'ไม่สามารถคัดลอกได้'
 };

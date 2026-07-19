@@ -117,5 +117,11 @@ export default {
   errorTitle: 'Что-то пошло не так',
   errorMsg: 'Не удалось загрузить данные. Проверьте подключение.',
   retry: 'Повторить',
-  langLabel: 'Язык'
+  langLabel: 'Язык',
+
+  // Share
+  shareResult: 'Поделиться результатом',
+  copyLink: 'Копировать ссылку',
+  linkCopied: 'Ссылка скопирована',
+  copyFailed: 'Не удалось скопировать'
 };

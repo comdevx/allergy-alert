@@ -117,5 +117,11 @@ export default {
   errorTitle: 'Etwas ist schiefgelaufen',
   errorMsg: 'Daten konnten nicht geladen werden. Prüfen Sie Ihre Verbindung.',
   retry: 'Erneut versuchen',
-  langLabel: 'Sprache'
+  langLabel: 'Sprache',
+
+  // Share
+  shareResult: 'Ergebnis teilen',
+  copyLink: 'Link kopieren',
+  linkCopied: 'Link kopiert',
+  copyFailed: 'Kopieren fehlgeschlagen'
 };

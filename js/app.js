@@ -1,6 +1,6 @@
 // app.js — orchestration: boot, data loading, event wiring, mock mode.
 
-import { SUPPORTED, initI18n, setLang, getLang, applyStatic } from './i18n.js';
+import { SUPPORTED, initI18n, setLang, getLang, applyStatic, t } from './i18n.js';
 import {
   scoreTemp, scoreHumidity, scoreAir, scorePollen, combine,
   computeTempDelta, forwardOutlook, findIdxNow, dailyForecast,
@@ -9,7 +9,9 @@ import { fetchBoth } from './api.js';
 import { PROVINCES } from './provinces.js';
 import * as storage from './storage.js';
 import * as ui from './ui.js';
+import { initShare, showShareBar, hideShareBar } from './share.js';
 
+const LEVEL_KEY = { low: 'levelLow', med: 'levelMed', high: 'levelHigh', vhigh: 'levelVhigh' };
 const CHIP_CACHE_MS = 30 * 60 * 1000;
 const MAX_AREAS = 5;
 const POLLEN_KEYS = [
@@ -139,6 +141,7 @@ function renderPayload(payload) {
   ui.renderOutlook($('outlookStrip'), $('outlookLabels'), $('outlookNote'), payload.outlook);
   ui.renderAdvice($('adviceList'), payload.result);
   ui.setUpdatedAt($('updatedAt'), new Date(payload.updatedAt));
+  showShareBar();
 }
 
 // ── Load flow ──
@@ -148,6 +151,7 @@ async function load({ bypassCache = false, revertIndexOnGeoFail = null } = {}) {
   ui.hideStale($('staleNotice'));
   state.staleAt = null;
   ui.showLoading();
+  hideShareBar();
   hidePicker();
   renderChipsNow();
 
@@ -440,6 +444,27 @@ function wireEvents() {
   $('pickerCancel').addEventListener('click', hidePicker);
   window.addEventListener('online', () => {
     load().catch(() => {});
+  });
+
+  initShare(() => {
+    if (!state.payload) return null;
+    const p = state.payload;
+    const loc = state.locations[state.selectedIndex];
+    const locationName = loc.type === 'geo'
+      ? String(t('currentLocation'))
+      : (getLang() === 'th' ? loc.nameTh : loc.nameEn);
+    return {
+      level: p.result.level,
+      levelText: String(t(LEVEL_KEY[p.result.level] || 'levelLow')),
+      locationName,
+      reasons: document.getElementById('bannerReason')?.textContent || '',
+      factors: {
+        tempDelta: p.factorData.temp.delta,
+        rh: p.factorData.humidity.rh,
+        pm25: p.factorData.air.pm25,
+        pollenMax: p.factorData.pollen.max,
+      },
+    };
   });
 }
 

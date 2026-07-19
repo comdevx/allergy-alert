@@ -117,5 +117,11 @@ export default {
   errorTitle: '出错了',
   errorMsg: '无法加载数据，请检查网络连接。',
   retry: '重试',
-  langLabel: '语言'
+  langLabel: '语言',
+
+  // Share
+  shareResult: '分享结果',
+  copyLink: '复制链接',
+  linkCopied: '链接已复制',
+  copyFailed: '无法复制'
 };

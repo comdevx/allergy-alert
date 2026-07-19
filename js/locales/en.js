@@ -117,5 +117,11 @@ export default {
   errorTitle: 'Something went wrong',
   errorMsg: 'Could not load data. Check your connection.',
   retry: 'Retry',
-  langLabel: 'Language'
+  langLabel: 'Language',
+
+  // Share
+  shareResult: 'Share result',
+  copyLink: 'Copy link',
+  linkCopied: 'Link copied',
+  copyFailed: 'Could not copy'
 };

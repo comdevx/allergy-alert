@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allergy Alert — Poster &amp; QR Code</title>
+<style>
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Noto Sans Thai", "Sukhumvit Set", system-ui, -apple-system, sans-serif;
+  background: #eef3f6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+}
+@media (prefers-color-scheme: dark) {
+  body { background: #101a21; }
+}
+
+/* ── Print Button ── */
+.print-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 10px 24px;
+  background: #1f7a8c;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.print-btn:hover { background: #18404d; }
+.print-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ── Poster Card ── */
+.poster {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(28, 43, 54, 0.10);
+}
+
+/* ── Header ── */
+.poster-header {
+  background: linear-gradient(135deg, #18404d, #1f7a8c);
+  padding: 32px 24px 28px;
+  text-align: center;
+  color: #fff;
+}
+.poster-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 14px;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.poster-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.poster-header p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* ── Body ── */
+.poster-body {
+  padding: 32px 24px;
+  text-align: center;
+}
+.qr-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.qr-container canvas {
+  border: 1px solid #d8e2e8;
+  border-radius: 10px;
+}
+.poster-body .scan-text {
+  font-size: 0.95rem;
+  color: #1c2b36;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.poster-body .url-text {
+  font-size: 0.75rem;
+  color: #5a707e;
+  font-family: "SF Mono", "Fira Code", monospace;
+  word-break: break-all;
+}
+
+/* ── Footer ── */
+.poster-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 20px 16px 24px;
+  border-top: 1px solid #d8e2e8;
+}
+.feature-item {
+  text-align: center;
+}
+.feature-item .icon {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+.feature-item .label {
+  font-size: 0.7rem;
+  color: #5a707e;
+  line-height: 1.3;
+}
+
+/* ── Print Styles ── */
+@media print {
+  body {
+    background: #fff !important;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .print-btn { display: none !important; }
+  .poster {
+    box-shadow: none;
+    border-radius: 0;
+    max-width: 100%;
+    width: 90mm;
+    margin: auto;
+  }
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
+}
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">
+  <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+  พิมพ์โปสเตอร์
+</button>
+
+<div class="poster">
+  <div class="poster-header">
+    <div class="poster-icon">🌡</div>
+    <h1>Allergy Alert</h1>
+    <p>เตือนภูมิแพ้อากาศ — รู้ก่อน เตรียมก่อน</p>
+  </div>
+  <div class="poster-body">
+    <div class="qr-container">
+      <canvas id="qr-canvas" width="200" height="200"></canvas>
+    </div>
+    <p class="scan-text">สแกนเพื่อเช็คความเสี่ยงภูมิแพ้</p>
+    <p class="url-text">https://comdevx.github.io/allergy-alert/</p>
+  </div>
+  <div class="poster-footer">
+    <div class="feature-item">
+      <div class="icon">🌡</div>
+      <div class="label">อุณหภูมิ</div>
+    </div>
+    <div class="feature-item">
+      <div class="icon">💧</div>
+      <div class="label">ความชื้น</div>
+    </div>
+    <div class="feature-item">
+      <div class="icon">🌫</div>
+      <div class="label">PM2.5</div>
+    </div>
+    <div class="feature-item">
+      <div class="icon">🌿</div>
+      <div class="label">ละอองเกสร</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// Minimal QR Code Encoder — Byte mode, EC Level L
+// Produces valid, scannable QR codes without external dependencies
+// ═══════════════════════════════════════════════════════════════════
+
+(function() {
+  'use strict';
+
+  // GF(256) arithmetic with polynomial 0x11d (x^8+x^4+x^3+x^2+1)
+  const EXP = new Uint8Array(256);
+  const LOG = new Uint8Array(256);
+  (function initGF() {
+    let v = 1;
+    for (let i = 0; i < 255; i++) {
+      EXP[i] = v;
+      LOG[v] = i;
+      v <<= 1;
+      if (v >= 256) v ^= 0x11d;
+    }
+    EXP[255] = EXP[0];
+  })();
+
+  function gfMul(a, b) {
+    if (a === 0 || b === 0) return 0;
+    return EXP[(LOG[a] + LOG[b]) % 255];
+  }
+
+  // Generate Reed-Solomon generator polynomial for t EC codewords
+  function rsGenPoly(t) {
+    let poly = [1];
+    for (let i = 0; i < t; i++) {
+      const newPoly = new Array(poly.length + 1).fill(0);
+      for (let j = 0; j < poly.length; j++) {
+        newPoly[j] ^= poly[j];
+        newPoly[j + 1] ^= gfMul(poly[j], EXP[i]);
+      }
+      poly = newPoly;
+    }
+    return poly;
+  }
+
+  // Compute Reed-Solomon EC codewords
+  function rsEncode(data, ecCount) {
+    const gen = rsGenPoly(ecCount);
+    const msg = new Array(data.length + ecCount).fill(0);
+    for (let i = 0; i < data.length; i++) msg[i] = data[i];
+    for (let i = 0; i < data.length; i++) {
+      const coef = msg[i];
+      if (coef !== 0) {
+        for (let j = 0; j < gen.length; j++) {
+          msg[i + j] ^= gfMul(gen[j], coef);
+        }
+      }
+    }
+    return msg.slice(data.length);
+  }
+
+  // QR version/EC parameters
+  // [version, size, totalCodewords, ecCodewordsPerBlock, numBlocks_g1, dataCW_g1, numBlocks_g2, dataCW_g2]
+  const VERSION_TABLE = [
+    null, // index 0 unused
+    [1, 21, 26, 7, 1, 19, 0, 0],
+    [2, 25, 44, 10, 1, 34, 0, 0],
+    [3, 29, 55, 15, 1, 55, 0, 0],
+    [4, 33, 80, 20, 1, 80, 0, 0],
+    [5, 37, 108, 26, 1, 108, 0, 0],
+    [6, 41, 136, 18, 2, 68, 0, 0],
+  ];
+
+  // Data capacity in byte mode for EC level L (versions 1-6)
+  const BYTE_CAPACITY = [0, 17, 32, 53, 78, 106, 134];
+
+  // Alignment pattern positions per version
+  const ALIGN_POS = [
+    null, [], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34]
+  ];
+
+  function selectVersion(dataLen) {
+    for (let v = 1; v <= 6; v++) {
+      if (dataLen <= BYTE_CAPACITY[v]) return v;
+    }
+    throw new Error('Data too long for supported QR versions');
+  }
+
+  // Encode data in byte mode
+  function encodeData(text, version) {
+    const vInfo = VERSION_TABLE[version];
+    const totalDataCW = vInfo[4] * vInfo[5] + vInfo[6] * vInfo[7];
+    const totalBits = totalDataCW * 8;
+    const bits = [];
+
+    function pushBits(val, len) {
+      for (let i = len - 1; i >= 0; i--) bits.push((val >> i) & 1);
+    }
+
+    // Mode indicator: byte = 0100
+    pushBits(0b0100, 4);
+    // Character count (8 bits for versions 1-9 in byte mode)
+    pushBits(text.length, 8);
+    // Data
+    for (let i = 0; i < text.length; i++) {
+      pushBits(text.charCodeAt(i), 8);
+    }
+    // Terminator (up to 4 zeros)
+    const termLen = Math.min(4, totalBits - bits.length);
+    pushBits(0, termLen);
+    // Pad to byte boundary
+    while (bits.length % 8 !== 0) bits.push(0);
+    // Pad codewords
+    const padBytes = [0xEC, 0x11];
+    let padIdx = 0;
+    while (bits.length < totalBits) {
+      pushBits(padBytes[padIdx % 2], 8);
+      padIdx++;
+    }
+
+    // Convert to bytes
+    const codewords = [];
+    for (let i = 0; i < bits.length; i += 8) {
+      let byte = 0;
+      for (let j = 0; j < 8; j++) byte = (byte << 1) | bits[i + j];
+      codewords.push(byte);
+    }
+    return codewords;
+  }
+
+  // Interleave data and EC blocks
+  function generateCodewords(text, version) {
+    const vInfo = VERSION_TABLE[version];
+    const ecPerBlock = vInfo[3];
+    const numBlocks1 = vInfo[4];
+    const dataCW1 = vInfo[5];
+    const numBlocks2 = vInfo[6];
+    const dataCW2 = vInfo[7];
+
+    const dataCodewords = encodeData(text, version);
+    const blocks = [];
+    const ecBlocks = [];
+    let offset = 0;
+
+    // Group 1
+    for (let i = 0; i < numBlocks1; i++) {
+      const block = dataCodewords.slice(offset, offset + dataCW1);
+      blocks.push(block);
+      ecBlocks.push(rsEncode(block, ecPerBlock));
+      offset += dataCW1;
+    }
+    // Group 2
+    for (let i = 0; i < numBlocks2; i++) {
+      const block = dataCodewords.slice(offset, offset + dataCW2);
+      blocks.push(block);
+      ecBlocks.push(rsEncode(block, ecPerBlock));
+      offset += dataCW2;
+    }
+
+    // Interleave data
+    const result = [];
+    const maxDataLen = Math.max(dataCW1, dataCW2 || 0);
+    for (let i = 0; i < maxDataLen; i++) {
+      for (const block of blocks) {
+        if (i < block.length) result.push(block[i]);
+      }
+    }
+    // Interleave EC
+    for (let i = 0; i < ecPerBlock; i++) {
+      for (const ec of ecBlocks) {
+        if (i < ec.length) result.push(ec[i]);
+      }
+    }
+    return result;
+  }
+
+  // Create QR matrix
+  function createMatrix(version) {
+    const size = VERSION_TABLE[version][1];
+    // 0 = white (data area), 1 = black (data area)
+    // Use separate arrays for module values and "reserved" flag
+    const matrix = Array.from({length: size}, () => new Uint8Array(size));
+    const reserved = Array.from({length: size}, () => new Uint8Array(size));
+    return { matrix, reserved, size };
+  }
+
+  function placeFinderPattern(m, row, col) {
+    for (let r = -1; r <= 7; r++) {
+      for (let c = -1; c <= 7; c++) {
+        const rr = row + r, cc = col + c;
+        if (rr < 0 || rr >= m.size || cc < 0 || cc >= m.size) continue;
+        let val = 0;
+        if (r >= 0 && r <= 6 && c >= 0 && c <= 6) {
+          if (r === 0 || r === 6 || c === 0 || c === 6) val = 1;
+          else if (r >= 2 && r <= 4 && c >= 2 && c <= 4) val = 1;
+        }
+        m.matrix[rr][cc] = val;
+        m.reserved[rr][cc] = 1;
+      }
+    }
+  }
+
+  function placeAlignmentPattern(m, row, col) {
+    for (let r = -2; r <= 2; r++) {
+      for (let c = -2; c <= 2; c++) {
+        const rr = row + r, cc = col + c;
+        if (m.reserved[rr][cc]) continue;
+        let val = 0;
+        if (r === -2 || r === 2 || c === -2 || c === 2 || (r === 0 && c === 0)) val = 1;
+        m.matrix[rr][cc] = val;
+        m.reserved[rr][cc] = 1;
+      }
+    }
+  }
+
+  function placeTimingPatterns(m) {
+    for (let i = 8; i < m.size - 8; i++) {
+      const val = (i % 2 === 0) ? 1 : 0;
+      if (!m.reserved[6][i]) {
+        m.matrix[6][i] = val;
+        m.reserved[6][i] = 1;
+      }
+      if (!m.reserved[i][6]) {
+        m.matrix[i][6] = val;
+        m.reserved[i][6] = 1;
+      }
+    }
+  }
+
+  function reserveFormatAreas(m) {
+    // Around top-left finder
+    for (let i = 0; i <= 8; i++) {
+      if (!m.reserved[8][i]) m.reserved[8][i] = 1;
+      if (!m.reserved[i][8]) m.reserved[i][8] = 1;
+    }
+    // Around top-right finder
+    for (let i = 0; i <= 7; i++) {
+      if (!m.reserved[8][m.size - 1 - i]) m.reserved[8][m.size - 1 - i] = 1;
+    }
+    // Around bottom-left finder
+    for (let i = 0; i <= 7; i++) {
+      if (!m.reserved[m.size - 1 - i][8]) m.reserved[m.size - 1 - i][8] = 1;
+    }
+    // Dark module
+    m.matrix[m.size - 8][8] = 1;
+    m.reserved[m.size - 8][8] = 1;
+  }
+
+  function placeDataBits(m, codewords) {
+    const bits = [];
+    for (const cw of codewords) {
+      for (let i = 7; i >= 0; i--) bits.push((cw >> i) & 1);
+    }
+
+    let bitIdx = 0;
+    let col = m.size - 1;
+    let upward = true;
+
+    while (col >= 0) {
+      if (col === 6) col--; // skip timing column
+      const rows = upward
+        ? Array.from({length: m.size}, (_, i) => m.size - 1 - i)
+        : Array.from({length: m.size}, (_, i) => i);
+
+      for (const row of rows) {
+        for (let c = 0; c <= 1; c++) {
+          const cc = col - c;
+          if (cc < 0) continue;
+          if (m.reserved[row][cc]) continue;
+          if (bitIdx < bits.length) {
+            m.matrix[row][cc] = bits[bitIdx];
+            bitIdx++;
+          }
+        }
+      }
+      col -= 2;
+      upward = !upward;
+    }
+  }
+
+  // Mask patterns
+  const MASK_FN = [
+    (r, c) => (r + c) % 2 === 0,
+    (r, c) => r % 2 === 0,
+    (r, c) => c % 3 === 0,
+    (r, c) => (r + c) % 3 === 0,
+    (r, c) => (Math.floor(r / 2) + Math.floor(c / 3)) % 2 === 0,
+    (r, c) => (r * c) % 2 + (r * c) % 3 === 0,
+    (r, c) => ((r * c) % 2 + (r * c) % 3) % 2 === 0,
+    (r, c) => ((r + c) % 2 + (r * c) % 3) % 2 === 0,
+  ];
+
+  function applyMask(m, maskIdx) {
+    const fn = MASK_FN[maskIdx];
+    const result = Array.from({length: m.size}, (_, r) =>
+      Uint8Array.from(m.matrix[r])
+    );
+    for (let r = 0; r < m.size; r++) {
+      for (let c = 0; c < m.size; c++) {
+        if (!m.reserved[r][c] && fn(r, c)) {
+          result[r][c] ^= 1;
+        }
+      }
+    }
+    return result;
+  }
+
+  // Format info: EC level L = 01, mask pattern 3 bits
+  // BCH(15,5) encoding
+  function getFormatBits(ecLevel, maskIdx) {
+    // EC Level L = 01
+    let data = (ecLevel << 3) | maskIdx; // 5 bits
+    let bits = data << 10;
+    // Divide by generator 10100110111 (x^10+x^8+x^5+x^4+x^2+x+1)
+    const gen = 0b10100110111;
+    for (let i = 4; i >= 0; i--) {
+      if (bits & (1 << (i + 10))) bits ^= gen << i;
+    }
+    bits = (data << 10) | bits;
+    // XOR with mask
+    bits ^= 0b101010000010010;
+    return bits;
+  }
+
+  function placeFormatInfo(matrix, size, ecLevel, maskIdx) {
+    const bits = getFormatBits(ecLevel, maskIdx);
+
+    // Copy 1: around top-left finder pattern
+    // Row 8, columns 0-5,7,8 (skip col 6 = timing)
+    const copy1_row8 = [0, 1, 2, 3, 4, 5, 7, 8]; // 8 positions → bits 0-7
+    // Col 8, rows 7,5,4,3,2,1,0 (skip row 6 = timing)
+    const copy1_col8 = [7, 5, 4, 3, 2, 1, 0]; // 7 positions → bits 8-14
+
+    // Copy 2: around other finders
+    // Col 8, rows size-1 down to size-7
+    const copy2_col8 = [size-1, size-2, size-3, size-4, size-5, size-6, size-7]; // 7 positions → bits 0-6
+    // Row 8, columns size-8 to size-1
+    const copy2_row8 = [size-8, size-7, size-6, size-5, size-4, size-3, size-2, size-1]; // 8 positions → bits 7-14
+
+    for (let i = 0; i < 15; i++) {
+      const bit = (bits >> (14 - i)) & 1;
+      // Copy 1
+      if (i < 8) {
+        matrix[8][copy1_row8[i]] = bit;
+      } else {
+        matrix[copy1_col8[i - 8]][8] = bit;
+      }
+      // Copy 2
+      if (i < 7) {
+        matrix[copy2_col8[i]][8] = bit;
+      } else {
+        matrix[8][copy2_row8[i - 7]] = bit;
+      }
+    }
+    // Dark module (always black)
+    matrix[size - 8][8] = 1;
+  }
+
+  // Penalty scoring
+  function calcPenalty(matrix, size) {
+    let penalty = 0;
+
+    // Rule 1: runs of 5+ same color
+    for (let r = 0; r < size; r++) {
+      let count = 1;
+      for (let c = 1; c < size; c++) {
+        if (matrix[r][c] === matrix[r][c - 1]) {
+          count++;
+        } else {
+          if (count >= 5) penalty += count - 2;
+          count = 1;
+        }
+      }
+      if (count >= 5) penalty += count - 2;
+    }
+    for (let c = 0; c < size; c++) {
+      let count = 1;
+      for (let r = 1; r < size; r++) {
+        if (matrix[r][c] === matrix[r - 1][c]) {
+          count++;
+        } else {
+          if (count >= 5) penalty += count - 2;
+          count = 1;
+        }
+      }
+      if (count >= 5) penalty += count - 2;
+    }
+
+    // Rule 2: 2x2 blocks
+    for (let r = 0; r < size - 1; r++) {
+      for (let c = 0; c < size - 1; c++) {
+        const v = matrix[r][c];
+        if (v === matrix[r][c + 1] && v === matrix[r + 1][c] && v === matrix[r + 1][c + 1]) {
+          penalty += 3;
+        }
+      }
+    }
+
+    // Rule 3: finder-like patterns
+    const pattern1 = [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0];
+    const pattern2 = [0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1];
+    for (let r = 0; r < size; r++) {
+      for (let c = 0; c <= size - 11; c++) {
+        let match1 = true, match2 = true;
+        for (let i = 0; i < 11; i++) {
+          if (matrix[r][c + i] !== pattern1[i]) match1 = false;
+          if (matrix[r][c + i] !== pattern2[i]) match2 = false;
+        }
+        if (match1 || match2) penalty += 40;
+      }
+    }
+    for (let c = 0; c < size; c++) {
+      for (let r = 0; r <= size - 11; r++) {
+        let match1 = true, match2 = true;
+        for (let i = 0; i < 11; i++) {
+          if (matrix[r + i][c] !== pattern1[i]) match1 = false;
+          if (matrix[r + i][c] !== pattern2[i]) match2 = false;
+        }
+        if (match1 || match2) penalty += 40;
+      }
+    }
+
+    // Rule 4: proportion of dark modules
+    let dark = 0;
+    for (let r = 0; r < size; r++)
+      for (let c = 0; c < size; c++)
+        if (matrix[r][c]) dark++;
+    const pct = (dark * 100) / (size * size);
+    const prev5 = Math.floor(pct / 5) * 5;
+    const next5 = prev5 + 5;
+    penalty += Math.min(Math.abs(prev5 - 50) / 5, Math.abs(next5 - 50) / 5) * 10;
+
+    return penalty;
+  }
+
+  // Main QR generation
+  function generateQR(text) {
+    const version = selectVersion(text.length);
+    const vInfo = VERSION_TABLE[version];
+    const size = vInfo[1];
+
+    // Generate codewords
+    const codewords = generateCodewords(text, version);
+
+    // Build matrix
+    const m = createMatrix(version);
+
+    // Place finder patterns
+    placeFinderPattern(m, 0, 0);
+    placeFinderPattern(m, 0, size - 7);
+    placeFinderPattern(m, size - 7, 0);
+
+    // Place alignment patterns
+    const alignPos = ALIGN_POS[version];
+    if (alignPos.length >= 2) {
+      for (let i = 0; i < alignPos.length; i++) {
+        for (let j = 0; j < alignPos.length; j++) {
+          const r = alignPos[i], c = alignPos[j];
+          // Skip if overlapping finder patterns
+          if (r <= 8 && c <= 8) continue;
+          if (r <= 8 && c >= size - 8) continue;
+          if (r >= size - 8 && c <= 8) continue;
+          placeAlignmentPattern(m, r, c);
+        }
+      }
+    }
+
+    // Place timing patterns
+    placeTimingPatterns(m);
+
+    // Reserve format areas
+    reserveFormatAreas(m);
+
+    // Place data
+    placeDataBits(m, codewords);
+
+    // Try all masks, pick best
+    let bestMask = 0;
+    let bestPenalty = Infinity;
+    let bestMatrix = null;
+
+    for (let mask = 0; mask < 8; mask++) {
+      const masked = applyMask(m, mask);
+      placeFormatInfo(masked, size, 1, mask); // EC Level L = 01 = 1
+      const pen = calcPenalty(masked, size);
+      if (pen < bestPenalty) {
+        bestPenalty = pen;
+        bestMask = mask;
+        bestMatrix = masked;
+      }
+    }
+
+    return { matrix: bestMatrix, size };
+  }
+
+  // Render QR to canvas
+  function renderQR(canvas, qr, quietZone) {
+    const ctx = canvas.getContext('2d');
+    const canvasSize = canvas.width;
+    const totalModules = qr.size + quietZone * 2;
+    const moduleSize = canvasSize / totalModules;
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvasSize, canvasSize);
+
+    ctx.fillStyle = '#1c2b36';
+    for (let r = 0; r < qr.size; r++) {
+      for (let c = 0; c < qr.size; c++) {
+        if (qr.matrix[r][c]) {
+          const x = (c + quietZone) * moduleSize;
+          const y = (r + quietZone) * moduleSize;
+          ctx.fillRect(Math.round(x), Math.round(y),
+            Math.ceil(moduleSize), Math.ceil(moduleSize));
+        }
+      }
+    }
+  }
+
+  // Generate and render
+  const url = 'https://comdevx.github.io/allergy-alert/';
+  const qr = generateQR(url);
+  const canvas = document.getElementById('qr-canvas');
+  renderQR(canvas, qr, 2);
+})();
+</script>
+</body>
+</html>

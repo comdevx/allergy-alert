@@ -117,5 +117,11 @@ export default {
   errorTitle: 'Algo salió mal',
   errorMsg: 'No se pudieron cargar los datos. Comprueba tu conexión.',
   retry: 'Reintentar',
-  langLabel: 'Idioma'
+  langLabel: 'Idioma',
+
+  // Share
+  shareResult: 'Compartir resultado',
+  copyLink: 'Copiar enlace',
+  linkCopied: 'Enlace copiado',
+  copyFailed: 'No se pudo copiar'
 };

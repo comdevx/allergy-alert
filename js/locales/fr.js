@@ -117,5 +117,11 @@ export default {
   errorTitle: 'Une erreur est survenue',
   errorMsg: 'Impossible de charger les données. Vérifiez votre connexion.',
   retry: 'Réessayer',
-  langLabel: 'Langue'
+  langLabel: 'Langue',
+
+  // Share
+  shareResult: 'Partager le résultat',
+  copyLink: 'Copier le lien',
+  linkCopied: 'Lien copié',
+  copyFailed: 'Impossible de copier'
 };

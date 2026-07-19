@@ -117,5 +117,11 @@ export default {
   errorTitle: '문제가 발생했습니다',
   errorMsg: '데이터를 불러오지 못했습니다. 연결 상태를 확인해 주세요.',
   retry: '다시 시도',
-  langLabel: '언어'
+  langLabel: '언어',
+
+  // Share
+  shareResult: '결과 공유',
+  copyLink: '링크 복사',
+  linkCopied: '링크가 복사되었습니다',
+  copyFailed: '복사할 수 없습니다'
 };

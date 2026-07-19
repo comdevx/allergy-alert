@@ -117,5 +117,11 @@ export default {
   errorTitle: 'エラーが発生しました',
   errorMsg: 'データを読み込めませんでした。通信環境をご確認ください。',
   retry: '再試行',
-  langLabel: '言語'
+  langLabel: '言語',
+
+  // Share
+  shareResult: '結果を共有',
+  copyLink: 'リンクをコピー',
+  linkCopied: 'リンクをコピーしました',
+  copyFailed: 'コピーできませんでした'
 };

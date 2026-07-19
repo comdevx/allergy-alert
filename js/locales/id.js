@@ -117,5 +117,11 @@ export default {
   errorTitle: 'Terjadi kesalahan',
   errorMsg: 'Gagal memuat data. Periksa koneksi Anda.',
   retry: 'Coba lagi',
-  langLabel: 'Bahasa'
+  langLabel: 'Bahasa',
+
+  // Share
+  shareResult: 'Bagikan hasil',
+  copyLink: 'Salin tautan',
+  linkCopied: 'Tautan disalin',
+  copyFailed: 'Gagal menyalin'
 };
