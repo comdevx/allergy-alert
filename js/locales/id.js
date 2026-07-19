@@ -123,5 +123,7 @@ export default {
   shareResult: 'Bagikan hasil',
   copyLink: 'Salin tautan',
   linkCopied: 'Tautan disalin',
-  copyFailed: 'Gagal menyalin'
+  copyFailed: 'Gagal menyalin',
+  shareTitle: 'Cek risiko alergi cuaca',
+  shareText: 'Risiko alergi cuaca hari ini: {level} — {reasons}\nCek wilayah Anda di'
 };

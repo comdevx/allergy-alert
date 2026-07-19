@@ -123,5 +123,7 @@ export default {
   shareResult: 'Share result',
   copyLink: 'Copy link',
   linkCopied: 'Link copied',
-  copyFailed: 'Could not copy'
+  copyFailed: 'Could not copy',
+  shareTitle: 'Check your allergy risk',
+  shareText: 'Weather allergy risk today: {level} — {reasons}\nCheck your area at'
 };

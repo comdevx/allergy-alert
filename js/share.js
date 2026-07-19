@@ -1,6 +1,6 @@
 // share.js — share card generation and Web Share / clipboard integration.
 
-import { t } from './i18n.js';
+import { t, fmt } from './i18n.js';
 
 let getShareData = null;
 
@@ -147,8 +147,8 @@ async function handleShare() {
   const file = new File([blob], 'allergy-alert.png', { type: 'image/png' });
 
   const shareData = {
-    title: `Allergy Alert — ${data.locationName}`,
-    text: `${data.levelText} — ${data.reasons || ''}`,
+    title: `${String(t('shareTitle'))} — ${data.locationName}`,
+    text: fmt('shareText', { level: data.levelText, reasons: data.reasons || '' }),
     url: globalThis.location.href,
   };
 

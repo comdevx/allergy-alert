@@ -123,5 +123,7 @@ export default {
   shareResult: '分享结果',
   copyLink: '复制链接',
   linkCopied: '链接已复制',
-  copyFailed: '无法复制'
+  copyFailed: '无法复制',
+  shareTitle: '查看天气过敏风险',
+  shareText: '今日天气过敏风险：{level} — {reasons}\n查看你所在地区'
 };

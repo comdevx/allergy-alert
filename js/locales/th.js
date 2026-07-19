@@ -124,5 +124,7 @@ export default {
   shareResult: 'แชร์ผลประเมิน',
   copyLink: 'คัดลอกลิงก์',
   linkCopied: 'คัดลอกลิงก์แล้ว',
-  copyFailed: 'ไม่สามารถคัดลอกได้'
+  copyFailed: 'ไม่สามารถคัดลอกได้',
+  shareTitle: 'เช็คความเสี่ยงภูมิแพ้อากาศ',
+  shareText: 'ความเสี่ยงภูมิแพ้อากาศวันนี้: {level} — {reasons}\nเช็คพื้นที่ของคุณได้ที่'
 };

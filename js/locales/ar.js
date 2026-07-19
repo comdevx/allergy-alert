@@ -124,5 +124,7 @@ export default {
   shareResult: 'مشاركة النتيجة',
   copyLink: 'نسخ الرابط',
   linkCopied: 'تم نسخ الرابط',
-  copyFailed: 'تعذر النسخ'
+  copyFailed: 'تعذر النسخ',
+  shareTitle: 'تحقق من خطر حساسية الطقس',
+  shareText: 'خطر حساسية الطقس اليوم: {level} — {reasons}\nتحقق من منطقتك على'
 };

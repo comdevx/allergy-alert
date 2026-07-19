@@ -123,5 +123,7 @@ export default {
   shareResult: '結果を共有',
   copyLink: 'リンクをコピー',
   linkCopied: 'リンクをコピーしました',
-  copyFailed: 'コピーできませんでした'
+  copyFailed: 'コピーできませんでした',
+  shareTitle: '天気アレルギーリスクをチェック',
+  shareText: '今日の天気アレルギーリスク: {level} — {reasons}\nあなたの地域をチェック'
 };

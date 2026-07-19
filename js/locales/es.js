@@ -123,5 +123,7 @@ export default {
   shareResult: 'Compartir resultado',
   copyLink: 'Copiar enlace',
   linkCopied: 'Enlace copiado',
-  copyFailed: 'No se pudo copiar'
+  copyFailed: 'No se pudo copiar',
+  shareTitle: 'Revisa tu riesgo de alergia al clima',
+  shareText: 'Riesgo de alergia al clima hoy: {level} — {reasons}\nRevisa tu zona en'
 };

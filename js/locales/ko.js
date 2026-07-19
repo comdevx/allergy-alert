@@ -123,5 +123,7 @@ export default {
   shareResult: '결과 공유',
   copyLink: '링크 복사',
   linkCopied: '링크가 복사되었습니다',
-  copyFailed: '복사할 수 없습니다'
+  copyFailed: '복사할 수 없습니다',
+  shareTitle: '날씨 알레르기 위험도 확인',
+  shareText: '오늘의 날씨 알레르기 위험도: {level} — {reasons}\n내 지역 확인하기'
 };

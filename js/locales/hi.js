@@ -123,5 +123,7 @@ export default {
   shareResult: 'परिणाम साझा करें',
   copyLink: 'लिंक कॉपी करें',
   linkCopied: 'लिंक कॉपी हो गया',
-  copyFailed: 'कॉपी नहीं हो सका'
+  copyFailed: 'कॉपी नहीं हो सका',
+  shareTitle: 'मौसम एलर्जी का जोखिम जांचें',
+  shareText: 'आज मौसम एलर्जी का जोखिम: {level} — {reasons}\nअपने क्षेत्र की जांच करें'
 };

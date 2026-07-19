@@ -123,5 +123,7 @@ export default {
   shareResult: 'Chia sẻ kết quả',
   copyLink: 'Sao chép liên kết',
   linkCopied: 'Đã sao chép liên kết',
-  copyFailed: 'Không thể sao chép'
+  copyFailed: 'Không thể sao chép',
+  shareTitle: 'Kiểm tra nguy cơ dị ứng thời tiết',
+  shareText: 'Nguy cơ dị ứng thời tiết hôm nay: {level} — {reasons}\nKiểm tra khu vực của bạn tại'
 };
